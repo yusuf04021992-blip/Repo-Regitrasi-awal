@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexbox/ITTS-YUSUF-1002240002</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0d142d, #1fcd2b, #fdbb2d);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #1a2a6c;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #b21f1f;
+        }
+
+        /* Section Headers */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 40px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 3px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .section-title {
+            color: white;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .view-all {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 2px solid white;
+            border-radius: 25px;
+            transition: all 0.3s;
+        }
+
+        .view-all:hover {
+            background: white;
+            color: #1a2a6c;
+        }
+
+        /* Flexbox Grid Styles */
+        .flex-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            justify-content: center;
+        }
+
+        /* Movie Card Styles */
+        .movie-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            flex: 1 1 300px;
+            max-width: 350px;
+        }
+
+        .movie-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .movie-poster {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .movie-info {
+            padding: 20px;
+        }
+
+        .movie-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #1a2a6c;
+        }
+
+        .movie-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .rating {
+            background: #fdbb2d;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-weight: bold;
+        }
+
+        .movie-description {
+            color: #555;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .watch-btn {
+            background: linear-gradient(135deg, #b21f1f, #fdbb2d);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+            transition: transform 0.2s;
+        }
+
+        .watch-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* News Card Styles */
+        .news-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+            flex: 1 1 350px;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .news-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .news-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-category {
+            background: #1a2a6c;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            align-self: flex-start;
+        }
+
+        .news-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #333;
+            line-height: 1.3;
+        }
+
+        .news-excerpt {
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        .news-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: #999;
+        }
+
+        .read-more {
+            color: #b21f1f;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .read-more:hover {
+            color: #1a2a6c;
+        }
+
+        /* Featured Section */
+        .featured-section {
+            margin: 50px 0;
+        }
+
+        .featured-grid {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .featured-card {
+            flex: 1 1 500px;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            display: flex;
+            min-height: 300px;
+        }
+
+        .featured-image {
+            flex: 1;
+            min-width: 200px;
+            object-fit: cover;
+        }
+
+        .featured-content {
+            flex: 2;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .featured-badge {
+            background: linear-gradient(135deg, #fdbb2d, #b21f1f);
+            color: white;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            align-self: flex-start;
+        }
+
+        .featured-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: #1a2a6c;
+        }
+
+        .featured-description {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 40px 0;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .footer-section {
+            flex: 1 1 250px;
+        }
+
+        .footer-title {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #fdbb2d;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #fdbb2d;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            .featured-card {
+                flex-direction: column;
+            }
+
+            .featured-image {
+                width: 100%;
+                height: 200px;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .movie-card,
+            .news-card {
+                flex: 1 1 100%;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">🎬 CineFlex</div>
+                <ul class="nav-links">
+                    <li><a href="#movies">Film</a></li>
+                    <li><a href="#news">Berita</a></li>
+                    <li><a href="#featured">Featured</a></li>
+                    <li><a href="#trending">Trending</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Featured Movies Section -->
+        <div class="section-header">
+            <h2 class="section-title">🎭 Film Terbaru</h2>
+            <a href="#" class="view-all">Lihat Semua</a>
+        </div>
+
+        <div class="flex-grid" id="movies">
+            <!-- Movie 1 -->
+            <div class="movie-card">
+                <img src="https://via.placeholder.com/400x250/1a2a6c/ffffff?text=Avatar+3" alt="Avatar 3" class="movie-poster">
+                <div class="movie-info">
+                    <h3 class="movie-title">Avatar: The Way of Water 2</h3>
+                    <div class="movie-meta">
+                        <span>2024 • Sci-Fi</span>
+                        <span class="rating">⭐ 8.9</span>
+                    </div>
+                    <p class="movie-description">Petualangan epik di dunia Pandora yang menakjubkan dengan visual effects terbaru.</p>
+                    <button class="watch-btn">Tonton Sekarang</button>
+                </div>
+            </div>
+
+            <!-- Movie 2 -->
+            <div class="movie-card">
+                <img src="https://via.placeholder.com/400x250/b21f1f/ffffff?text=Spider-Man" alt="Spider-Man" class="movie-poster">
+                <div class="movie-info">
+                    <h3 class="movie-title">Spider-Man: Across the Multiverse</h3>
+                    <div class="movie-meta">
+                        <span>2024 • Animation</span>
+                        <span class="rating">⭐ 9.2</span>
+                    </div>
+                    <p class="movie-description">Miles Morales kembali dengan petualangan multiverse yang lebih menegangkan.</p>
+                    <button class="watch-btn">Tonton Sekarang</button>
+                </div>
+            </div>
+
+            <!-- Movie 3 -->
+            <div class="movie-card">
+                <img src="https://via.placeholder.com/400x250/fdbb2d/333333?text=Oppenheimer" alt="Oppenheimer" class="movie-poster">
+                <div class="movie-info">
+                    <h3 class="movie-title">Oppenheimer Returns</h3>
+                    <div class="movie-meta">
+                        <span>2024 • Drama</span>
+                        <span class="rating">⭐ 8.7</span>
+                    </div>
+                    <p class="movie-description">Kisah lanjutan tentang ilmuwan legendaris dan dampak penemuannya.</p>
+                    <button class="watch-btn">Tonton Sekarang</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Entertainment News Section -->
+        <div class="section-header">
+            <h2 class="section-title">📰 Berita Entertainment</h2>
+            <a href="#" class="view-all">Baca Semua</a>
+        </div>
+
+        <div class="flex-grid" id="news">
+            <!-- News 1 -->
+            <div class="news-card">
+                <img src="https://via.placeholder.com/400x200/1a2a6c/ffffff?text=Marvel+Phase+6" alt="Marvel News" class="news-image">
+                <div class="news-content">
+                    <span class="news-category">FILM</span>
+                    <h3 class="news-title">Marvel Umumkan Phase 6 dengan 10 Film Baru</h3>
+                    <p class="news-excerpt">Studio Marvel mengumumkan rencana ambisius untuk Phase 6 dengan memasukkan karakter-karakter baru yang tak terduga.</p>
+                    <div class="news-meta">
+                        <span>2 jam yang lalu</span>
+                        <a href="#" class="read-more">Baca Selengkapnya →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- News 2 -->
+            <div class="news-card">
+                <img src="https://via.placeholder.com/400x200/b21f1f/ffffff?text=Music+Awards" alt="Music Awards" class="news-image">
+                <div class="news-content">
+                    <span class="news-category">MUSIK</span>
+                    <h3 class="news-title">Grammy Awards 2024: Daftar Pemenang Lengkap</h3>
+                    <p class="news-excerpt">Malam penganugerahan Grammy Awards 2024 penuh kejutan dengan kemenangan artis-artis independen.</p>
+                    <div class="news-meta">
+                        <span>5 jam yang lalu</span>
+                        <a href="#" class="read-more">Baca Selengkapnya →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- News 3 -->
+            <div class="news-card">
+                <img src="https://via.placeholder.com/400x200/fdbb2d/333333?text=Netflix+Original" alt="Netflix" class="news-image">
+                <div class="news-content">
+                    <span class="news-category">STREAMING</span>
+                    <h3 class="news-title">Netflix Rilis 20 Film Original Indonesia di 2024</h3>
+                    <p class="news-excerpt">Platform streaming Netflix berkomitmen memperkuat konten lokal dengan investasi besar-besaran.</p>
+                    <div class="news-meta">
+                        <span>1 hari yang lalu</span>
+                        <a href="#" class="read-more">Baca Selengkapnya →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Featured Content Section -->
+        <div class="featured-section" id="featured">
+            <div class="featured-grid">
+                <!-- Featured 1 -->
+                <div class="featured-card">
+                    <img src="https://via.placeholder.com/300x400/1a2a6c/ffffff?text=Blockbuster" alt="Featured Movie" class="featured-image">
+                    <div class="featured-content">
+                        <span class="featured-badge">FILM OF THE YEAR</span>
+                        <h2 class="featured-title">Dune: Part Two - Masterpiece Sci-Fi</h2>
+                        <p class="featured-description">Denis Villeneuve kembali dengan sekuel yang lebih epik dari Dune. Visual yang memukau dan cerita yang mendalam membuat film ini layak menjadi film terbaik tahun 2024.</p>
+                        <button class="watch-btn">Tonton Trailer</button>
+                    </div>
+                </div>
+
+                <!-- Featured 2 -->
+                <div class="featured-card">
+                    <img src="https://via.placeholder.com/300x400/b21f1f/ffffff?text=Concert" alt="Featured Concert" class="featured-image">
+                    <div class="featured-content">
+                        <span class="featured-badge">LIVE EVENT</span>
+                        <h2 class="featured-title">Coldplay World Tour 2024: Jakarta</h2>
+                        <p class="featured-description">Coldplay kembali ke Indonesia dengan konser spektakuler. Dapatkan tiketnya sekarang sebelum kehabisan!</p>
+                        <button class="watch-btn">Beli Tiket</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Movies -->
+        <div class="section-header" id="trending">
+            <h2 class="section-title">🔥 Sedang Trend</h2>
+            <a href="#" class="view-all">Explore</a>
+        </div>
+
+        <div class="flex-grid">
+            <!-- Movie 4 -->
+            <div class="movie-card">
+                <img src="https://via.placeholder.com/400x250/6a11cb/ffffff?text=John+Wick+5" alt="John Wick 5" class="movie-poster">
+                <div class="movie-info">
+                    <h3 class="movie-title">John Wick: Chapter 5</h3>
+                    <div class="movie-meta">
+                        <span>2024 • Action</span>
+                        <span class="rating">⭐ 8.5</span>
+                    </div>
+                    <p class="movie-description">John Wick kembali dengan misi terakhir yang penuh aksi dan intrik.</p>
+                    <button class="watch-btn">Tonton Sekarang</button>
+                </div>
+            </div>
+
+            <!-- Movie 5 -->
+            <div class="movie-card">
+                <img src="https://via.placeholder.com/400x250/2575fc/ffffff?text=Transformers" alt="Transformers" class="movie-poster">
+                <div class="movie-info">
+                    <h3 class="movie-title">Transformers: Rise of the Beasts</h3>
+                    <div class="movie-meta">
+                        <span>2024 • Sci-Fi</span>
+                        <span class="rating">⭐ 7.8</span>
+                    </div>
+                    <p class="movie-description">Perang antara Autobots dan Decepticons mencapai level baru.</p>
+                    <button class="watch-btn">Tonton Sekarang</button>
+                </div>
+            </div>
+
+            <!-- Movie 6 -->
+            <div class="movie-card">
+                <img src="https://via.placeholder.com/400x250/ff6b6b/ffffff?text=Barbie+2" alt="Barbie 2" class="movie-poster">
+                <div class="movie-info">
+                    <h3 class="movie-title">Barbie: Dream Adventure</h3>
+                    <div class="movie-meta">
+                        <span>2024 • Comedy</span>
+                        <span class="rating">⭐ 8.1</span>
+                    </div>
+                    <p class="movie-description">Petualangan baru Barbie di dunia nyata dengan twist yang mengejutkan.</p>
+                    <button class="watch-btn">Tonton Sekarang</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">Tentang CineFlex</h3>
+                    <p style="color: #ccc; line-height: 1.6;">Platform entertainment terdepan untuk film, berita, dan acara terbaru. Selalu update dengan konten terkini.</p>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Film</a></li>
+                        <li><a href="#">Berita</a></li>
+                        <li><a href="#">Trending</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-title">Kontak</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Email: info@cineflex.com</a></li>
+                        <li><a href="#">Telepon: +62 21 1234 5678</a></li>
+                        <li><a href="#">Alamat: Jakarta, Indonesia</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
